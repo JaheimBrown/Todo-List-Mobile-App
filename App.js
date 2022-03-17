@@ -1,6 +1,13 @@
 import { useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, TextInput, Pressable } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Pressable,
+  ScrollView,
+} from "react-native";
 
 export default function App() {
   // States
@@ -8,6 +15,15 @@ export default function App() {
   const [age, setAge] = useState("17");
   const [change, setChange] = useState(false);
   const [message, setMessage] = useState("");
+  const [list, setList] = useState([
+    { id: 1, name: "Jaheim" },
+    { id: 2, name: "Devonte" },
+    { id: 3, name: "Camron" },
+    { id: 4, name: "Trevon" },
+    { id: 5, name: "Teklea" },
+    { id: 6, name: "Jovan" },
+    { id: 7, name: "Lamoy" },
+  ]);
 
   // Functions
   const updateName = val => {
@@ -39,31 +55,43 @@ export default function App() {
           My First React Native Application 👍
         </Text>
       </View>
-      {/* Inputs & States */}
-      <Text style={styles.label}>Enter Name:</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="e.g John Doe"
-        onChangeText={val => {
-          updateName(val);
-        }}
-      ></TextInput>
-      <Text style={styles.label}>Enter Age:</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="e.g 0 - 99+"
-        keyboardType="numeric"
-        onChangeText={val => {
-          updateAge(val);
-        }}
-      ></TextInput>
-      <Pressable
-        style={change ? styles.primaryBtn2 : styles.primaryBtn}
-        onPress={displayMsg}
-      >
-        <Text style={styles.btnTxt}>Switch</Text>
-      </Pressable>
-      <Text style={styles.finalTxt}>{message}</Text>
+      <ScrollView style={styles.scrollContainer}>
+        {/* Inputs & States */}
+        <Text style={styles.label}>Enter Name:</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="e.g John Doe"
+          onChangeText={val => {
+            updateName(val);
+          }}
+        ></TextInput>
+        <Text style={styles.label}>Enter Age:</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="e.g 0 - 99+"
+          keyboardType="numeric"
+          onChangeText={val => {
+            updateAge(val);
+          }}
+        ></TextInput>
+        <Pressable
+          style={change ? styles.primaryBtn2 : styles.primaryBtn}
+          onPress={displayMsg}
+        >
+          <Text style={styles.btnTxt}>Switch</Text>
+        </Pressable>
+        <Text style={styles.finalTxt}>{message}</Text>
+
+        {/* Mapping through data and creating a list and scrollable view */}
+        <View style={styles.headerContainer}>
+          <Text style={styles.header}>List of People</Text>
+        </View>
+        {list.map(person => (
+          <View style={styles.listContainer} key={person.id}>
+            <Text style={styles.listItem}>{person.name}</Text>
+          </View>
+        ))}
+      </ScrollView>
       <StatusBar style="auto" />
     </View>
   );
@@ -109,7 +137,7 @@ const styles = StyleSheet.create({
     borderStyle: "dotted",
     borderColor: "rgba(0,0,0,0.3)",
     padding: 20,
-    width: "80%",
+    marginHorizontal: "10%",
     marginTop: 16,
   },
   primaryBtn: {
@@ -134,5 +162,38 @@ const styles = StyleSheet.create({
   finalTxt: {
     marginTop: 64,
     opacity: 0.8,
+  },
+  listContainer: {
+    paddingTop: 24,
+    paddingBottom: 24,
+    paddingLeft: 16,
+    paddingRight: 16,
+    backgroundColor: "blue",
+    marginHorizontal: "10%",
+    marginTop: 16,
+    marginBottom: 16,
+    borderRadius: 4,
+  },
+  listItem: {
+    color: "#fff",
+  },
+  headerContainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    height: 70,
+    backgroundColor: "blue",
+    margin: 0,
+  },
+  header: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginBottom: 16,
+    color: "#fff",
+  },
+  scrollContainer: {
+    display: "flex",
+    width: "100%",
   },
 });
