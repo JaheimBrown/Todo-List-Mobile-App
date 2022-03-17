@@ -7,6 +7,7 @@ import {
   TextInput,
   Pressable,
   ScrollView,
+  FlatList,
 } from "react-native";
 
 export default function App() {
@@ -50,13 +51,25 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+      <FlatList
+        // numColumns={2}
+        keyExtractor={item => item.id}
+        data={list}
+        renderItem={({ item }) => (
+          <View style={styles.listContainer}>
+            <Text style={styles.listItem}>{item.name}</Text>
+          </View>
+        )}
+      />
+
+      {/* 
       <View style={change ? styles.button2 : styles.button}>
         <Text style={styles.whiteTxt}>
           My First React Native Application 👍
         </Text>
       </View>
       <ScrollView style={styles.scrollContainer}>
-        {/* Inputs & States */}
+    
         <Text style={styles.label}>Enter Name:</Text>
         <TextInput
           style={styles.input}
@@ -82,7 +95,6 @@ export default function App() {
         </Pressable>
         <Text style={styles.finalTxt}>{message}</Text>
 
-        {/* Mapping through data and creating a list and scrollable view */}
         <View style={styles.headerContainer}>
           <Text style={styles.header}>List of People</Text>
         </View>
@@ -91,7 +103,7 @@ export default function App() {
             <Text style={styles.listItem}>{person.name}</Text>
           </View>
         ))}
-      </ScrollView>
+      </ScrollView> */}
       <StatusBar style="auto" />
     </View>
   );
@@ -101,7 +113,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
+    // alignItems: "center",
     justifyContent: "flex-start",
     paddingTop: 48,
   },
@@ -170,6 +182,7 @@ const styles = StyleSheet.create({
     paddingRight: 16,
     backgroundColor: "blue",
     marginHorizontal: "10%",
+
     marginTop: 16,
     marginBottom: 16,
     borderRadius: 4,
