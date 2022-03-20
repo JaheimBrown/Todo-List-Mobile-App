@@ -47,7 +47,7 @@ export default function App() {
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
-        <StatusBar style="auto" />
+        <StatusBar style="light" />
         {/* Header Component */}
         <Header />
         {/* Form Component */}
