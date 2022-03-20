@@ -59,6 +59,7 @@ export default function App() {
         {/* Todo's */}
         <View style={styles.itemContainer}>
           <FlatList
+            style={styles.list}
             data={todos}
             keyExtractor={item => item.id}
             renderItem={({ item }) => (
@@ -78,7 +79,7 @@ const styles = StyleSheet.create({
   },
   itemContainer: {
     marginTop: 20,
-    padding: 40,
+    flex: 1,
   },
-  item: {},
+  list: { width: "100%", padding: 40 },
 });
